@@ -1,7 +1,0 @@
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\bin\Debug\caynhiphancodeCsharp.exe.config
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\bin\Debug\caynhiphancodeCsharp.exe
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\bin\Debug\caynhiphancodeCsharp.pdb
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\obj\Debug\caynhiphancodeCsharp.csprojAssemblyReference.cache
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\obj\Debug\caynhiphancodeCsharp.csproj.CoreCompileInputs.cache
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\obj\Debug\caynhiphancodeCsharp.exe
-D:\hk3\cấu trúc dữ liệu\caynhiphancodeCsharp\caynhiphancodeCsharp\obj\Debug\caynhiphancodeCsharp.pdb
