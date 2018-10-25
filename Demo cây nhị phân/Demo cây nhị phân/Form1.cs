@@ -16,7 +16,6 @@ namespace Demo_cây_nhị_phân
         public Form1()
         {
             InitializeComponent();
-            btnGenerateTree_Click(null, null);
         }
 
       
@@ -31,7 +30,18 @@ namespace Demo_cây_nhị_phân
         void UpdateInfo()
         {
             lblNodeCount.Text = "Node Count: " + userControl11.NodeCount;
-            //lblTreeHeight.Text = "Tree Height: " + bsTreePanel1.TreeHeight;
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+           
+            if (!userControl11.AddNode((int)numericUpDown1.Value))
+                userControl11.Text = "Tree already contain an node with that value";
+            else
+                UpdateInfo();
+
         }
     }
 }

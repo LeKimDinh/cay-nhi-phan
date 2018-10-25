@@ -142,6 +142,7 @@
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add Node";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // numericUpDown1
             // 
