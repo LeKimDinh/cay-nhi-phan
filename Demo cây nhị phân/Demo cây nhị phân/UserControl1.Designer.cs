@@ -41,9 +41,9 @@
             // 
             this.panel1.Controls.Add(this.txtOutput);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 326);
+            this.panel1.Location = new System.Drawing.Point(0, 387);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(472, 24);
+            this.panel1.Size = new System.Drawing.Size(781, 24);
             this.panel1.TabIndex = 3;
             // 
             // txtOutput
@@ -52,7 +52,7 @@
             this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutput.Location = new System.Drawing.Point(0, 0);
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(472, 20);
+            this.txtOutput.Size = new System.Drawing.Size(781, 20);
             this.txtOutput.TabIndex = 1;
             // 
             // panel2
@@ -62,7 +62,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(472, 326);
+            this.panel2.Size = new System.Drawing.Size(781, 387);
             this.panel2.TabIndex = 4;
             // 
             // pictureBox1
@@ -70,7 +70,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(472, 326);
+            this.pictureBox1.Size = new System.Drawing.Size(781, 387);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -82,7 +82,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(472, 350);
+            this.Size = new System.Drawing.Size(781, 411);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
