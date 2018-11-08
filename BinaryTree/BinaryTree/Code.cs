@@ -34,6 +34,7 @@ namespace BinaryTree
             tr.PostOrder(tr.root);
             Console.WriteLine();
 <<<<<<< HEAD
+<<<<<<< HEAD
             Console.Write("Chieu cao lon nhat cua cay: ");
             int kq = Convert.ToInt32(tr.ChieuCao(tr.root));
             Console.WriteLine(kq);
@@ -45,6 +46,11 @@ namespace BinaryTree
             Console.WriteLine();
 
 
+=======
+            Console.WriteLine("Nhap vao gia tri ban can xoa: ");
+            x = int.Parse(Console.ReadLine());
+            Console.WriteLine(tr.Remove(tr.root,x));
+>>>>>>> 4981c5b3ebd8b8528933db999ef2982f1332b304
 =======
             Console.WriteLine("Nhap vao gia tri ban can xoa: ");
             x = int.Parse(Console.ReadLine());

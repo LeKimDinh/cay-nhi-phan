@@ -74,8 +74,13 @@ namespace BinaryTree
 
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         //xóa node
          public bool Remove(BSTree root,int key)
+=======
+        // xóa
+        public bool Remove(BSTree root,int key)
+>>>>>>> 4981c5b3ebd8b8528933db999ef2982f1332b304
 =======
         // xóa
         public bool Remove(BSTree root,int key)
@@ -116,6 +121,7 @@ namespace BinaryTree
                 p.right = null;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
         }  
         //tính chiều cao cây nhị phân
         public int ChieuCao(BSTree root)
@@ -138,6 +144,10 @@ namespace BinaryTree
                 if (IsLeafNode(root) == 1) return 1;
             else return CountLeaf(root.right) + CountLeaf(root.left);          
         }
+=======
+        }
+
+>>>>>>> 4981c5b3ebd8b8528933db999ef2982f1332b304
 =======
         }
 
