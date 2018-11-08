@@ -32,7 +32,10 @@ namespace BinaryTree
             Console.WriteLine();
             Console.WriteLine("Duyet hau tu: ");
             tr.PostOrder(tr.root);
-            
+            Console.WriteLine();
+            Console.WriteLine("Nhap vao gia tri ban can xoa: ");
+            x = int.Parse(Console.ReadLine());
+            Console.WriteLine(tr.Remove(tr.root,x));
         }
     }
 }

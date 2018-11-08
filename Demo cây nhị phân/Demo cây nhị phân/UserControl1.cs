@@ -56,11 +56,11 @@ namespace Demo_cây_nhị_phân
         {
             InitializeComponent();
             _brush = new LinearGradientBrush(new Rectangle(0, VER_DISTANCE / 2, 100, VER_DISTANCE),
-        Color.White, Color.Purple, LinearGradientMode.Vertical);
-            _penNormal = new Pen(Color.Green, 3);
-            _penHighLight = new Pen(Color.Black, 3);
+       Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
+            _penNormal = new Pen(Color.DarkBlue, 2);
+            _penHighLight = new Pen(Color.Red, 3);
             _font = new Font("Arial", 18);
-            _Tree = new BinaryTree(50);
+            _Tree = new BinaryTree();
         }
         private void BSTreePanel_Load(object sender, EventArgs e)
         {
@@ -72,14 +72,9 @@ namespace Demo_cây_nhị_phân
             {
                 MessageBox.Show("Invalid parameters!", "OMG");
                 return;
-            }
-
-            //_queue = null;
-
+            }         
             _Tree.Clear();
-
             Random rnd = new Random();
-
             int[] arr = new int[size];
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = rnd.Next(min, max);
@@ -90,10 +85,11 @@ namespace Demo_cây_nhị_phân
         {
             _ratio = (_Tree.Count * 200) / this.Width;
 
-            if (resetAll)
+            if (resetAll==true)
             {
-
-
+                _leftRoot = pictureBox1.Width / 2;
+                _minLeft = _leftRoot;
+                _maxLeft = _leftRoot;
                 _g = pictureBox1.CreateGraphics();
                 CalculateSize(_g, _leftRoot, _Tree.Root);
                 _leftRoot += 100 - _minLeft;
@@ -108,11 +104,11 @@ namespace Demo_cây_nhị_phân
 
         private void CalculateSize(Graphics g, float left, BinaryTreeNode node)
         {
-            _leftRoot = pictureBox1.Width / 2;
-            _minLeft = _leftRoot;
-            _maxLeft = _leftRoot;
+           
             if (node != null)
             {
+                string text = node.Value.ToString();
+                SizeF size = g.MeasureString(text, pictureBox1.Font);
                 float x = left - RADIUS / 2;
                 if (node.HasLeft)
                 {
@@ -126,7 +122,6 @@ namespace Demo_cây_nhị_phân
                 if (node.HasRight)
                 {
                     float p2 = x + Math.Abs(node.RightChild.Value - node.Value) * _ratio;
-
                     if (p2 < _minLeft)
                         _minLeft = p2;
                     if (p2 > _maxLeft)
@@ -138,48 +133,34 @@ namespace Demo_cây_nhị_phân
 
         private void DrawTreeNode(Graphics g, PointF p, BinaryTreeNode node, bool highlight)
         {
-
             if (node != null)
             {
                 string text = node.Value.ToString();
                 SizeF size = g.MeasureString(text, _font);
-
                 float ellipseWidth = RADIUS + size.Width;
                 float ellipseHeight = RADIUS + size.Height;
-
                 float left = p.X - ellipseWidth / 2;
                 float top = p.Y - ellipseHeight / 2;
-
                 Pen pen = _penNormal;
-
-
                 if (node.HasLeft)
                 {
                     PointF p1 = p;
                     PointF p2 = p;
-
                     p1.X = left + ellipseWidth / 2;
-
-
                     p2.X -= (node.Value - node.LeftChild.Value) * _ratio;
-
                     p2.Y += VER_DISTANCE;
-
                     bool hlight = false;
-
                     if (_queue != null && _queue.Count > 0)
                     {
                         if (_queue.Peek() == node.LeftChild.Value)
                         {
-
+                            _queue.Dequeue();
                             pen = _penHighLight;
                             hlight = true;
                         }
                     }
                     g.DrawLine(pen, p1, p2);
-
-                    DrawTreeNode(g, p2, node.LeftChild, true);
-
+                    DrawTreeNode(g, p2, node.LeftChild, hlight);
                     if (p2.X < _minLeft)
                         _minLeft = p2.X;
                     if (p2.X > _maxLeft)
@@ -190,37 +171,29 @@ namespace Demo_cây_nhị_phân
                     PointF p1 = p;
                     PointF p2 = p;
                     p1.X = left + ellipseWidth / 2;
-
                     p2.X += (node.RightChild.Value - node.Value) * _ratio;
-
                     p2.Y += VER_DISTANCE;
-
                     pen = _penNormal;
                     bool hlight = false;
                     if (_queue != null && _queue.Count > 0)
                     {
                         if (_queue.Peek() == node.RightChild.Value)
                         {
-
+                            _queue.Dequeue();
                             pen = _penHighLight;
                             hlight = true;
                         }
                     }
                     g.DrawLine(pen, p1, p2);
-
-                    DrawTreeNode(g, p2, node.RightChild, true);
-
+                    DrawTreeNode(g, p2, node.RightChild, hlight);
                     if (p2.X < _minLeft)
                         _minLeft = p2.X;
                     if (p2.X > _maxLeft)
                         _maxLeft = p2.X;
                 }
-
                 pen = highlight ? _penHighLight : _penNormal;
-
                 g.FillEllipse(_brush, left, top, ellipseWidth, ellipseHeight);
                 g.DrawEllipse(pen, left, top, ellipseWidth, ellipseHeight);
-
                 g.DrawString(text, _font, Brushes.Black, left + RADIUS / 2, top + RADIUS / 2);
             }
         }
@@ -250,6 +223,38 @@ namespace Demo_cây_nhị_phân
             txtOutput.Clear();
             BeginDraw(false);
             return true;
+        }
+        public void InOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("In-Order Traversal: ");
+            List<int> list = _Tree.InOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+
+        }
+        public void PreOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
+            List<int> list = _Tree.PreOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+        }
+        public void PostOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Post-Order Traversal: ");
+            List<int> list = _Tree.PostOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
         }
     }
 }

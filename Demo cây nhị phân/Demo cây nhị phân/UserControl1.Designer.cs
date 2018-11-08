@@ -50,6 +50,7 @@
             // 
             this.txtOutput.BackColor = System.Drawing.Color.Black;
             this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOutput.ForeColor = System.Drawing.SystemColors.Window;
             this.txtOutput.Location = new System.Drawing.Point(0, 0);
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.Size = new System.Drawing.Size(781, 20);

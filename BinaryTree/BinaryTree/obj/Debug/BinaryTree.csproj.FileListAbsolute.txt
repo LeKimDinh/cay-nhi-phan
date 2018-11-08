@@ -5,3 +5,10 @@ C:\Users\Bich Ngoc\source\repos\BinaryTree\BinaryTree\bin\Debug\BinaryTree.exe
 C:\Users\Bich Ngoc\source\repos\BinaryTree\BinaryTree\bin\Debug\BinaryTree.pdb
 C:\Users\Bich Ngoc\source\repos\BinaryTree\BinaryTree\obj\Debug\BinaryTree.exe
 C:\Users\Bich Ngoc\source\repos\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.exe.config
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csprojAssemblyReference.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csproj.CoreCompileInputs.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb

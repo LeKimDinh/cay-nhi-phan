@@ -91,21 +91,23 @@
             // 
             // btnPostOrderTraverse
             // 
-            this.btnPostOrderTraverse.Location = new System.Drawing.Point(322, 97);
+            this.btnPostOrderTraverse.Location = new System.Drawing.Point(313, 97);
             this.btnPostOrderTraverse.Name = "btnPostOrderTraverse";
             this.btnPostOrderTraverse.Size = new System.Drawing.Size(111, 28);
             this.btnPostOrderTraverse.TabIndex = 16;
             this.btnPostOrderTraverse.Text = "Post-Order Traverse";
             this.btnPostOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPostOrderTraverse.Click += new System.EventHandler(this.btnPostOrderTraverse_Click);
             // 
             // btnPreOrderTraverse
             // 
-            this.btnPreOrderTraverse.Location = new System.Drawing.Point(322, 57);
+            this.btnPreOrderTraverse.Location = new System.Drawing.Point(313, 57);
             this.btnPreOrderTraverse.Name = "btnPreOrderTraverse";
             this.btnPreOrderTraverse.Size = new System.Drawing.Size(111, 28);
             this.btnPreOrderTraverse.TabIndex = 15;
             this.btnPreOrderTraverse.Text = "Pre-Order Traverse";
             this.btnPreOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPreOrderTraverse.Click += new System.EventHandler(this.btnPreOrderTraverse_Click);
             // 
             // btnInOrderTraverse
             // 
@@ -115,15 +117,17 @@
             this.btnInOrderTraverse.TabIndex = 14;
             this.btnInOrderTraverse.Text = "In-Order Traverse";
             this.btnInOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnInOrderTraverse.Click += new System.EventHandler(this.btnInOrderTraverse_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(123, 97);
+            this.btnDelete.Location = new System.Drawing.Point(123, 94);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(74, 28);
             this.btnDelete.TabIndex = 13;
             this.btnDelete.Text = "Delete Node";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSearch
             // 
@@ -133,6 +137,7 @@
             this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnAdd
             // 
@@ -162,7 +167,7 @@
             // 
             // btnGenerateTree
             // 
-            this.btnGenerateTree.Location = new System.Drawing.Point(6, 88);
+            this.btnGenerateTree.Location = new System.Drawing.Point(3, 94);
             this.btnGenerateTree.Name = "btnGenerateTree";
             this.btnGenerateTree.Size = new System.Drawing.Size(108, 31);
             this.btnGenerateTree.TabIndex = 8;

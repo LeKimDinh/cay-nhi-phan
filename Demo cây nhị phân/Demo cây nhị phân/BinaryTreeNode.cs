@@ -188,5 +188,55 @@ namespace Demo_cây_nhị_phân
 
             return q;
         }
+        #region InOrder Traversal
+        public virtual List<int> InOrderTraverse()
+        {
+            _list.Clear();
+            InOrderTraverse(Root);
+            return _list;
+        }
+        private void InOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            InOrderTraverse(node.LeftChild);
+            _list.Add(node.Value);
+            InOrderTraverse(node.RightChild);
+        }
+        #endregion
+
+        #region PreOrder Traversal
+        public virtual List<int> PreOrderTraverse()
+        {
+            _list.Clear();
+            PreOrderTraverse(Root);
+            return _list;
+        }
+        private void PreOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            _list.Add(node.Value);
+            PreOrderTraverse(node.LeftChild);
+            PreOrderTraverse(node.RightChild);
+        }
+        #endregion
+
+        #region PostOrder Traversal
+        public virtual List<int> PostOrderTraverse()
+        {
+            _list.Clear();
+            PostOrderTraverse(Root);
+            return _list;
+        }
+        private void PostOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            PostOrderTraverse(node.LeftChild);
+            PostOrderTraverse(node.RightChild);
+            _list.Add(node.Value);
+        }
+        #endregion
     }
 }
