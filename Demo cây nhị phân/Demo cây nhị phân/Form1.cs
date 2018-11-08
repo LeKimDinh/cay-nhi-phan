@@ -16,15 +16,11 @@ namespace Demo_cây_nhị_phân
         public Form1()
         {
             InitializeComponent();
-        }
-
-      
-
+        }     
         private void btnGenerateTree_Click(object sender, EventArgs e)
         {
             userControl11.GenerateTree((int)numSize.Value,
                (int)numMin.Value, (int)numMax.Value);
-
             UpdateInfo();
         }
         void UpdateInfo()
@@ -36,12 +32,37 @@ namespace Demo_cây_nhị_phân
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
-           
-            if (!userControl11.AddNode((int)numericUpDown1.Value))
-                userControl11.Text = "Tree already contain an node with that value";
-            else
+
+            userControl11.AddNode((int)numericUpDown1.Value);      
                 UpdateInfo();
 
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            userControl11.SearchNode((int)numericUpDown1.Value);   
+                UpdateInfo();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+           
+        }
+
+        private void btnInOrderTraverse_Click(object sender, EventArgs e)
+        {
+            userControl11.InOrderTraverse(); 
+        }
+
+        private void btnPreOrderTraverse_Click(object sender, EventArgs e)
+        {
+            userControl11.PreOrderTraverse();
+        }
+
+        private void btnPostOrderTraverse_Click(object sender, EventArgs e)
+        {
+            userControl11.PostOrderTraverse();
         }
     }
 }

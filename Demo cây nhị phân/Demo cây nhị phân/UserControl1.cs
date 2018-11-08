@@ -25,11 +25,11 @@ namespace Demo_cây_nhị_phân
         Brush _brush;
         Font _font;
 
-        BinaryTree<int> _Tree;
+        BinaryTree _Tree;
 
-        float _Root;
-        float _min;
-        float _max;
+        float _leftRoot;
+        float _minLeft;
+        float _maxLeft;
 
         float _ratio;
 
@@ -39,6 +39,8 @@ namespace Demo_cây_nhị_phân
         }
 
         Graphics _g;
+
+        Queue<int> _queue;
 
         public int NodeCount
         {
@@ -53,19 +55,12 @@ namespace Demo_cây_nhị_phân
         public UserControl1()
         {
             InitializeComponent();
-
-            this.SetStyle(ControlStyles.UserPaint |
-                ControlStyles.DoubleBuffer |
-                ControlStyles.AllPaintingInWmPaint, true);
-
             _brush = new LinearGradientBrush(new Rectangle(0, VER_DISTANCE / 2, 100, VER_DISTANCE),
-        Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
-            _penNormal = new Pen(Color.OrangeRed, 5);
-            _penHighLight = new Pen(Color.Purple, 5);
+       Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
+            _penNormal = new Pen(Color.DarkBlue, 2);
+            _penHighLight = new Pen(Color.Red, 3);
             _font = new Font("Arial", 18);
-            _Tree = new BinaryTree<int>();
-
-
+            _Tree = new BinaryTree();
         }
         private void BSTreePanel_Load(object sender, EventArgs e)
         {
@@ -75,72 +70,68 @@ namespace Demo_cây_nhị_phân
         {
             if (min >= max || (max - min < size))
             {
-                MessageBox.Show("So lieu khong hop le");
+                MessageBox.Show("Invalid parameters!", "OMG");
                 return;
-            }
-
-           
-
+            }         
             _Tree.Clear();
-
             Random rnd = new Random();
-
             int[] arr = new int[size];
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = rnd.Next(min, max);
             _Tree.Add(arr);
             BeginDraw(true);
-        }
-       
+        }       
         private void BeginDraw(bool resetAll)
         {
-            _ratio = (_Tree.Count * 300) / this.Width;
-            if (resetAll != false)
-            {
-                _Root = pictureBox1.Width / 2;
-                _max = _Root;
-                _min = _Root;
-                _g = pictureBox1.CreateGraphics();
-                CalculateSize(_g, _Root, _Tree.Root);
-                _Root += 100 - _min;
-                _max += 250 - _min;
-            }
-            
+            _ratio = (_Tree.Count * 200) / this.Width;
 
-            Image img = new Bitmap((int)_max, ((_Tree.GetHeight() + 1) * VER_DISTANCE));
+            if (resetAll==true)
+            {
+                _leftRoot = pictureBox1.Width / 2;
+                _minLeft = _leftRoot;
+                _maxLeft = _leftRoot;
+                _g = pictureBox1.CreateGraphics();
+                CalculateSize(_g, _leftRoot, _Tree.Root);
+                _leftRoot += 100 - _minLeft;
+                _maxLeft += 250 - _minLeft;
+            }
+            Image img = new Bitmap((int)_maxLeft, (_Tree.GetHeight() + 1) * VER_DISTANCE);
             pictureBox1.Image = img;
             _g = Graphics.FromImage(pictureBox1.Image);
-            DrawTreeNode(_g, new PointF(_Root, DIAMETER * 2), _Tree.Root, true);
+            _g.SmoothingMode = SmoothingMode.AntiAlias;
+            DrawTreeNode(_g, new PointF(_leftRoot, DIAMETER * 2), _Tree.Root, true);
         }
-        private void CalculateSize(Graphics g, float left, BinaryTreeNode<int> node)
+
+        private void CalculateSize(Graphics g, float left, BinaryTreeNode node)
         {
+           
             if (node != null)
             {
                 string text = node.Value.ToString();
                 SizeF size = g.MeasureString(text, pictureBox1.Font);
-                float x = left - (RADIUS + size.Width) / 2;
+                float x = left - RADIUS / 2;
                 if (node.HasLeft)
                 {
                     float p2 = x - Math.Abs(node.Value - node.LeftChild.Value) * _ratio;
-                    if (p2 < _min)
-                        _min = p2;
-                    if (p2 > _max)
-                        _max = p2;
-
+                    if (p2 < _minLeft)
+                        _minLeft = p2;
+                    if (p2 > _maxLeft)
+                        _maxLeft = p2;
                     CalculateSize(g, p2, node.LeftChild);
                 }
                 if (node.HasRight)
                 {
                     float p2 = x + Math.Abs(node.RightChild.Value - node.Value) * _ratio;
-                    if (p2 < _min)
-                        _min = p2;
-                    if (p2 > _max)
-                        _max = p2;
+                    if (p2 < _minLeft)
+                        _minLeft = p2;
+                    if (p2 > _maxLeft)
+                        _maxLeft = p2;
                     CalculateSize(g, p2, node.RightChild);
                 }
             }
         }
-        private void DrawTreeNode(Graphics g, PointF p, BinaryTreeNode<int> node, bool highlight)
+
+        private void DrawTreeNode(Graphics g, PointF p, BinaryTreeNode node, bool highlight)
         {
             if (node != null)
             {
@@ -157,13 +148,23 @@ namespace Demo_cây_nhị_phân
                     PointF p2 = p;
                     p1.X = left + ellipseWidth / 2;
                     p2.X -= (node.Value - node.LeftChild.Value) * _ratio;
-                    p2.Y += VER_DISTANCE;                                      
+                    p2.Y += VER_DISTANCE;
+                    bool hlight = false;
+                    if (_queue != null && _queue.Count > 0)
+                    {
+                        if (_queue.Peek() == node.LeftChild.Value)
+                        {
+                            _queue.Dequeue();
+                            pen = _penHighLight;
+                            hlight = true;
+                        }
+                    }
                     g.DrawLine(pen, p1, p2);
-                    DrawTreeNode(g, p2, node.LeftChild, true);
-                    if (p2.X < _min)
-                        _min = p2.X;
-                    if (p2.X > _max)
-                        _max = p2.X;
+                    DrawTreeNode(g, p2, node.LeftChild, hlight);
+                    if (p2.X < _minLeft)
+                        _minLeft = p2.X;
+                    if (p2.X > _maxLeft)
+                        _maxLeft = p2.X;
                 }
                 if (node.HasRight)
                 {
@@ -172,20 +173,31 @@ namespace Demo_cây_nhị_phân
                     p1.X = left + ellipseWidth / 2;
                     p2.X += (node.RightChild.Value - node.Value) * _ratio;
                     p2.Y += VER_DISTANCE;
-                    pen = _penNormal;                                       
+                    pen = _penNormal;
+                    bool hlight = false;
+                    if (_queue != null && _queue.Count > 0)
+                    {
+                        if (_queue.Peek() == node.RightChild.Value)
+                        {
+                            _queue.Dequeue();
+                            pen = _penHighLight;
+                            hlight = true;
+                        }
+                    }
                     g.DrawLine(pen, p1, p2);
-                    DrawTreeNode(g, p2, node.RightChild, true);
-                    if (p2.X < _min)
-                        _min = p2.X;
-                    if (p2.X > _max)
-                        _max = p2.X;
+                    DrawTreeNode(g, p2, node.RightChild, hlight);
+                    if (p2.X < _minLeft)
+                        _minLeft = p2.X;
+                    if (p2.X > _maxLeft)
+                        _maxLeft = p2.X;
                 }
-                pen = false ? _penHighLight : _penNormal;
+                pen = highlight ? _penHighLight : _penNormal;
                 g.FillEllipse(_brush, left, top, ellipseWidth, ellipseHeight);
                 g.DrawEllipse(pen, left, top, ellipseWidth, ellipseHeight);
                 g.DrawString(text, _font, Brushes.Black, left + RADIUS / 2, top + RADIUS / 2);
             }
         }
+
         public bool AddNode(int value)
         {
             if (!_Tree.Add(value))
@@ -197,6 +209,52 @@ namespace Demo_cây_nhị_phân
             txtOutput.Clear();
             BeginDraw(true);
             return true;
+        }
+
+        public bool SearchNode(int value)
+        {
+            _queue = _Tree.FindPath(value);
+            if (_queue == null)
+            {
+                txtOutput.Text = "Tree does not contain value " + value;
+                txtOutput.SelectAll();
+                return false;
+            }
+            txtOutput.Clear();
+            BeginDraw(false);
+            return true;
+        }
+        public void InOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("In-Order Traversal: ");
+            List<int> list = _Tree.InOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+
+        }
+        public void PreOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
+            List<int> list = _Tree.PreOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+        }
+        public void PostOrderTraverse()
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Post-Order Traversal: ");
+            List<int> list = _Tree.PostOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
         }
     }
 }
