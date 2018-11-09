@@ -238,6 +238,8 @@
             // 
             // userControl11
             // 
+            this.userControl11.BackColor = System.Drawing.SystemColors.Menu;
+            this.userControl11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
             this.userControl11.Size = new System.Drawing.Size(571, 453);

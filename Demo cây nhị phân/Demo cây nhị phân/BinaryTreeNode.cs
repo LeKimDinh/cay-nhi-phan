@@ -64,11 +64,11 @@ namespace Demo_cây_nhị_phân
         public virtual bool Add(int value)
         {
             BinaryTreeNode node = new BinaryTreeNode(value);
-            if (Root == null)// nếu rỗng
+            if (Root == null)
             {
-                Count++;  // tanwg số phần tử lên 1
-                Root = node; // nút gốc banwgf gái trị node
-                return true; // thông báo gán thành công
+                Count++;  
+                Root = node;
+                return true;
             }
             return Add(Root, node);
         }
