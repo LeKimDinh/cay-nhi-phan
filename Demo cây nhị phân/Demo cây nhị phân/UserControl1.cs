@@ -56,8 +56,8 @@ namespace Demo_cây_nhị_phân
         {
             InitializeComponent();
             _brush = new LinearGradientBrush(new Rectangle(0, VER_DISTANCE / 2, 100, VER_DISTANCE),
-       Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
-            _penNormal = new Pen(Color.DarkBlue, 2);
+       Color.WhiteSmoke, Color.Black, LinearGradientMode.Vertical);
+            _penNormal = new Pen(Color.Green, 3);
             _penHighLight = new Pen(Color.Red, 3);
             _font = new Font("Arial", 18);
             _Tree = new BinaryTree();
@@ -194,7 +194,7 @@ namespace Demo_cây_nhị_phân
                 pen = highlight ? _penHighLight : _penNormal;
                 g.FillEllipse(_brush, left, top, ellipseWidth, ellipseHeight);
                 g.DrawEllipse(pen, left, top, ellipseWidth, ellipseHeight);
-                g.DrawString(text, _font, Brushes.Black, left + RADIUS / 2, top + RADIUS / 2);
+                g.DrawString(text, _font, Brushes.DarkRed, left + RADIUS / 2, top + RADIUS / 2);
             }
         }
 
@@ -208,6 +208,8 @@ namespace Demo_cây_nhị_phân
             }
             txtOutput.Clear();
             BeginDraw(true);
+            _queue = _Tree.FindPath(value);
+            BeginDraw(false);
             return true;
         }
 
