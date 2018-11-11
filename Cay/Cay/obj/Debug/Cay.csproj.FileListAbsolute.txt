@@ -1,0 +1,10 @@
+G:\CTDL&GT\Cay\Cay\bin\Debug\Cay.exe.config
+G:\CTDL&GT\Cay\Cay\bin\Debug\Cay.exe
+G:\CTDL&GT\Cay\Cay\bin\Debug\Cay.pdb
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.csprojAssemblyReference.cache
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.CayNP.resources
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.Properties.Resources.resources
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.csproj.GenerateResource.cache
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.csproj.CoreCompileInputs.cache
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.exe
+G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.pdb
