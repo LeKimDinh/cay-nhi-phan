@@ -47,7 +47,7 @@
             this.btnInOrderTraverse = new System.Windows.Forms.Button();
             this.btnPreOrderTraverse = new System.Windows.Forms.Button();
             this.btnPostOrderTraverse = new System.Windows.Forms.Button();
-            this.lblMessage = new System.Windows.Forms.Label();
+            this.lblNodeCount = new System.Windows.Forms.Label();
             this.lblTreeHeight = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -70,9 +70,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(1, 0);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(608, 337);
+            this.pictureBox1.Size = new System.Drawing.Size(608, 335);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -192,6 +193,7 @@
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Add Node";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnSearch
             // 
@@ -201,6 +203,7 @@
             this.btnSearch.TabIndex = 13;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnDelete
             // 
@@ -210,6 +213,7 @@
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete Node";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnInOrderTraverse
             // 
@@ -219,6 +223,7 @@
             this.btnInOrderTraverse.TabIndex = 15;
             this.btnInOrderTraverse.Text = "In-Order Traverse";
             this.btnInOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnInOrderTraverse.Click += new System.EventHandler(this.btnInOrderTraverse_Click);
             // 
             // btnPreOrderTraverse
             // 
@@ -228,6 +233,7 @@
             this.btnPreOrderTraverse.TabIndex = 16;
             this.btnPreOrderTraverse.Text = "Pre-Order Traverse";
             this.btnPreOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPreOrderTraverse.Click += new System.EventHandler(this.btnPreOrderTraverse_Click);
             // 
             // btnPostOrderTraverse
             // 
@@ -237,14 +243,15 @@
             this.btnPostOrderTraverse.TabIndex = 17;
             this.btnPostOrderTraverse.Text = "Post-Order Traverse";
             this.btnPostOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPostOrderTraverse.Click += new System.EventHandler(this.btnPostOrderTraverse_Click);
             // 
-            // lblMessage
+            // lblNodeCount
             // 
-            this.lblMessage.Location = new System.Drawing.Point(437, 374);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(118, 35);
-            this.lblMessage.TabIndex = 18;
-            this.lblMessage.Text = "label5";
+            this.lblNodeCount.Location = new System.Drawing.Point(437, 374);
+            this.lblNodeCount.Name = "lblNodeCount";
+            this.lblNodeCount.Size = new System.Drawing.Size(118, 35);
+            this.lblNodeCount.TabIndex = 18;
+            this.lblNodeCount.Text = "label5";
             // 
             // lblTreeHeight
             // 
@@ -261,7 +268,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 495);
             this.Controls.Add(this.lblTreeHeight);
-            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.lblNodeCount);
             this.Controls.Add(this.btnPostOrderTraverse);
             this.Controls.Add(this.btnPreOrderTraverse);
             this.Controls.Add(this.btnInOrderTraverse);
@@ -316,7 +323,7 @@
         private System.Windows.Forms.Button btnInOrderTraverse;
         private System.Windows.Forms.Button btnPreOrderTraverse;
         private System.Windows.Forms.Button btnPostOrderTraverse;
-        private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Label lblNodeCount;
         private System.Windows.Forms.Label lblTreeHeight;
     }
 }

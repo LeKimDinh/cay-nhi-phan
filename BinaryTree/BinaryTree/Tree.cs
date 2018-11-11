@@ -21,6 +21,16 @@ namespace BinaryTree
                 return 0;
             return 1;
         }
+        //xuat
+        public void Output(BSTree root)
+        {
+            if (root != null)
+            {
+                Console.WriteLine(" "+root.data);
+                Output(root.left);
+                Output(root.right);
+            }        
+        }
         //chèn vào node
         public void InsertNode(int key)
         {
@@ -74,41 +84,67 @@ namespace BinaryTree
 
         }
         //xóa node
-         public bool Remove(BSTree root,int key)
+         public  bool Remove(BSTree root,int key)
         {
             if (root == null)
                 return false;
-            if (root.data > key)
-                return Remove(root.left, key);
-            if (root.Data < key)
-                return Remove(root.right, key);
-            if (root.left == null)
+            if (root.data == key)
             {
-                root = root.right;
-                root.right = null;
-                
-            }
-            else if (root.right == null)
-            {
-                root = root.left;
-                root.left = null;
+                if (root.left == null && root.right == null)
+                {
+                    root = null;
+                   
+                }
+                else
+                {
+                    if (root.left == null)
+                    {
+                        root = root.right;
+                        root.right = null;
+                        
+                    }
+                    else
+                    {
+                        if (root.right == null)
+                        {
+                            root = root.left;
+                            root.left = null;
+                          
+                        }
+                        else
+                        {
+                            MoveLeftMostNode(root.right, root);
+                            
+                        }
+                     
+                    }
+                }
             }
             else
             {
-                BSTree p = root.right;
-                MoveLeftMostNode(p, root);
+                if (root.data > key)
+                {
+                    return Remove(root.left, key);
+                }
+                if (root.data < key)
+                {
+                    return Remove(root.right, key);
+                }
             }
             return true;
         }
+       
         public void MoveLeftMostNode(BSTree p, BSTree root)
         {
             if (p.left != null)
                 MoveLeftMostNode(p.left, root);
             else
             {
+                
                 root.data = p.data;
-                p = p.right;
-                p.right = null;
+                BSTree n = p.right;
+                p = n;
+                p.right= null;
             }
         }  
         //tính chiều cao cây nhị phân
@@ -125,7 +161,7 @@ namespace BinaryTree
         //tính số nút lá
         public int CountLeaf(BSTree root)
         {
-            int n = 0;
+            
             if (root == null)
                 return 0;
             else

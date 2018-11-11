@@ -12,3 +12,10 @@ G:\CTDL&GT\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csprojAssemblyReference.ca
 G:\CTDL&GT\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csproj.CoreCompileInputs.cache
 G:\CTDL&GT\BinaryTree\BinaryTree\obj\Debug\BinaryTree.exe
 G:\CTDL&GT\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.exe.config
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\bin\Debug\BinaryTree.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csprojAssemblyReference.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csproj.CoreCompileInputs.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb

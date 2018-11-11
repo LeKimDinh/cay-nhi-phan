@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using DemoBinaryTree;
-
+using System.Text.RegularExpressions;
 namespace DemoBinaryTree
 {
     public partial class Form1 : Form
@@ -17,7 +17,7 @@ namespace DemoBinaryTree
         const int RADIUS = 20;
         const int DIAMETER = RADIUS * 2;
         const int HOR_DISTANCE = 70;
-        const int VER_DISTANCE = 100;
+        const int VER_DISTANCE =100;
 
         Pen _penNormal;
         Pen _penHighLight;
@@ -45,39 +45,24 @@ namespace DemoBinaryTree
         {
             get { return _Tree.count; }
         }
-
+        public int TreeHeight
+        {
+            get { return _Tree.GetHeight(); }
+        }
         public Form1()
         {
             InitializeComponent();
             _brush = new LinearGradientBrush(new Rectangle(0, VER_DISTANCE / 2, 100, VER_DISTANCE),
        Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
-            _penNormal = new Pen(Color.DarkBlue, 2);
+            _penNormal = new Pen(Color.DarkBlue, 3);
             _penHighLight = new Pen(Color.Red, 3);
             _font = new Font("Arial", 18);
             _Tree = new BinaryTree();
 
-        }
-        public void GenerateTree(int size, int min, int max)
-        {
-            if (min >= max || (max - min < size))
-            {
-                MessageBox.Show("Invalid parameters!", "OMG");
-                return;
-            }
-            //_Tree.Clear();
-            Random rnd = new Random();
-            int[] arr = new int[size];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = rnd.Next(min, max);
-                _Tree.Add(arr[i]);
-            }
-            BeginDraw(true);
-        }
+        }       
         private void BeginDraw(bool resetAll)
         {
-            _ratio = (_Tree.count * 200) / this.Width;
-
+            _ratio = (_Tree.count * 200) /this.Width;
             if (resetAll == true)
             {
                 _leftRoot = pictureBox1.Width / 2;
@@ -94,7 +79,6 @@ namespace DemoBinaryTree
             _g.SmoothingMode = SmoothingMode.AntiAlias;
             DrawTreeNode(_g, new PointF(_leftRoot, DIAMETER * 2), _Tree.root, true);
         }
-
         private void CalculateSize(Graphics g, float left, BinaryTreeNode node)
         {
 
@@ -102,7 +86,7 @@ namespace DemoBinaryTree
             {
                 string text = node.key.ToString();
                 SizeF size = g.MeasureString(text, pictureBox1.Font);
-                float x = left - RADIUS / 2;
+                float x = left - (RADIUS + size.Width) / 2;
                 if (node.HasLeft)
                 {
                     float p2 = x - Math.Abs(node.key - node.left.key) * _ratio;
@@ -123,7 +107,6 @@ namespace DemoBinaryTree
                 }
             }
         }
-
         private void DrawTreeNode(Graphics g, PointF p, BinaryTreeNode node, bool highlight)
         {
             if (node != null)
@@ -201,122 +184,107 @@ namespace DemoBinaryTree
             }
             txtOutput.Clear();
             BeginDraw(true);
-            //_queue = _Tree.FindPath(value);
-            //BeginDraw(false);
+            _queue = _Tree.FindPath(value);
+            BeginDraw(false);
             return true;
         }
 
-        private void btnGenerateTree_Click(object sender, EventArgs e)
+        private void btnGenerateTree_Click(object sender, EventArgs e)           
         {
-            GenerateTree((int)numSize.Value,
-                (int)numMin.Value, (int)numMax.Value);
+            _Tree.Clear();
+            int min = (int)numMin.Value;
+            int max = (int)numMax.Value;
+            int size = (int)numSize.Value;
+            if (min >= max || (max - min < size))
+            {
+                MessageBox.Show("Invalid parameters!", "OMG");
+                return;
+            }
+            Random rnd = new Random();
+            int[] arr = new int[size];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = rnd.Next(min, max);
+                _Tree.Add(arr[i]);
+            }
+            BeginDraw(true);
+            UpdateInfo();
+
         }
 
-        //public bool SearchNode(int value)
-        //{
-        //    _queue = _Tree.FindPath(value);
-        //    if (_queue == null)
-        //    {
-        //        txtOutput.Text = "Tree does not contain value " + value;
-        //        txtOutput.SelectAll();
-        //        return false;
-        //    }
-        //    txtOutput.Clear();
-        //    BeginDraw(false);
-        //    return true;
-        //}
-        //    public void InOrderTraverse()
-        //    {
-        //        txtOutput.Clear();
-        //        StringBuilder str = new StringBuilder("In-Order Traversal: ");
-        //        List<int> list = _Tree.InOrderTraverse();
-        //        list.ForEach(i => str.Append(i).Append(", "));
-        //        txtOutput.Text = str.ToString();
-        //        list.Clear();
-        //        list = null;
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            int value = (int)numericUpDown1.Value;
+            _queue = _Tree.FindPath(value);
+            if (_queue == null)
+            {
+                txtOutput.Text = "Tree does not contain value " + value;
+                txtOutput.SelectAll();
+                return ;
+            }
+            txtOutput.Clear();
+            BeginDraw(false);
+           
 
-        //    }
-        //    public void PreOrderTraverse()
-        //    {
-        //        txtOutput.Clear();
-        //        StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
-        //        List<int> list = _Tree.PreOrderTraverse();
-        //        list.ForEach(i => str.Append(i).Append(", "));
-        //        txtOutput.Text = str.ToString();
-        //        list.Clear();
-        //        list = null;
-        //    }
-        //    public void PostOrderTraverse()
-        //    {
-        //        txtOutput.Clear();
-        //        StringBuilder str = new StringBuilder("Post-Order Traversal: ");
-        //        List<int> list = _Tree.PostOrderTraverse();
-        //        list.ForEach(i => str.Append(i).Append(", "));
+            return;
+        }
 
-        //        txtOutput.Text = str.ToString();
-        //        list.Clear();
-        //        list = null;
-        //    }
-        //}
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Add((int)numericUpDown1.Value);
+            UpdateInfo();
 
+        }
+        private void btnInOrderTraverse_Click(object sender, EventArgs e)
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("In-Order Traversal: ");
+            List<int> list = _Tree.InOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+        }
 
+        private void btnPreOrderTraverse_Click(object sender, EventArgs e)
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
+            List<int> list = _Tree.PreOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+        }
 
+        private void btnPostOrderTraverse_Click(object sender, EventArgs e)
+        {
+            txtOutput.Clear();
+            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
+            List<int> list = _Tree.PostOrderTraverse();
+            list.ForEach(i => str.Append(i).Append(", "));
+            txtOutput.Text = str.ToString();
+            list.Clear();
+            list = null;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int value = (int)numericUpDown1.Value;
+            if (!_Tree.Remove(value))
+            {
+                txtOutput.Text = "Tree does not contain value " + value;
+                txtOutput.SelectAll();
+                return;
+            }
+            txtOutput.Clear();
+            BeginDraw(false);
+            UpdateInfo();
+        }
+        void UpdateInfo()
+        {
+            lblNodeCount.Text = "Node Count: " + NodeCount;
+            lblTreeHeight.Text = "Tree Height: " + TreeHeight;
+        }
     }
 }

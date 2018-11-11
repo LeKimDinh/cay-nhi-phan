@@ -11,7 +11,7 @@ namespace DemoBinaryTree
         public int key { get; set; }
         public BinaryTreeNode left { get; set; }
         public BinaryTreeNode right { get; set; }
-
+        public BinaryTreeNode parent { get; set; }
         public bool Isleaf
         {
             get { return left == null && right == null; }
@@ -34,14 +34,14 @@ namespace DemoBinaryTree
     class BinaryTree
     {
        public BinaryTreeNode root;
-       List<int> list;
+       List<int> _list;
        public  int count;
         // khởi tạo
         public BinaryTree()
         {
             root = null;
             count = 0;
-            list = new List<int>();
+            _list = new List<int>();
         }
         //addnode
         public virtual bool Add(int value)
@@ -66,6 +66,7 @@ namespace DemoBinaryTree
                 if (!node1.HasLeft)
                 {
                     node1.left = node2;
+                    node2.parent = node1;
                     count++;
                     return true;
                 }
@@ -77,6 +78,7 @@ namespace DemoBinaryTree
                 if (!node1.HasRight)
                 {
                     node1.right = node2;
+                    node2.parent = node1;
                     count++;
                     return true;
                 }
@@ -94,5 +96,178 @@ namespace DemoBinaryTree
             else
                 return 1 + Math.Max(GetHeight(startNode.left), GetHeight(startNode.right));
         }
+        public virtual void ClearChildren(BinaryTreeNode node)
+        {
+
+            if (node.HasLeft)
+            {
+                ClearChildren(node.left);
+                node.left.parent = null;
+                node.left = null;
+            }
+            if (node.HasRight)
+            {
+                ClearChildren(node.right);
+                node.right.parent = null;
+                node.right= null;
+            }
+        }
+        public virtual void Clear()
+        {
+            if (root == null)
+                return;
+            ClearChildren(root);
+            root = null;
+            count = 0;
+        }
+        public virtual Queue<int> FindPath(int value)
+        {
+            Queue<int> q = new Queue<int>();
+            BinaryTreeNode node = this.root;
+            bool isFounded = false;
+            while (node != null)
+            {
+                if (node.key.Equals(value))
+                {
+                    isFounded = true;
+                    break;
+                }
+                else
+                {
+                    if (node.key.CompareTo(value) > 0)
+                        node = node.left;
+                    else
+                        node = node.right;
+                    if (node != null)
+                        q.Enqueue(node.key);
+                }
+            }           
+            if (!isFounded)
+            {
+                q.Clear();
+                q = null;
+            }
+            return q;
+        }
+        public virtual List<int> InOrderTraverse()
+        {
+            _list.Clear();
+            InOrderTraverse(root);
+            return _list;
+        }
+        private void InOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            InOrderTraverse(node.left);
+            _list.Add(node.key);
+            InOrderTraverse(node.right);
+        }
+        public virtual List<int> PreOrderTraverse()
+        {
+            _list.Clear();
+            PreOrderTraverse(root);
+            return _list;
+        }
+        private void PreOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            PreOrderTraverse(node.left);          
+            PreOrderTraverse(node.right);
+            _list.Add(node.key);
+        }
+
+        public virtual List<int> PostOrderTraverse()
+        {
+            _list.Clear();
+            PostOrderTraverse(root);
+            return _list;
+        }
+        private void PostOrderTraverse(BinaryTreeNode node)
+        {
+            if (node == null)
+                return;
+            _list.Add(node.key);
+            PostOrderTraverse(node.left);
+            PostOrderTraverse(node.right);
+            
+        }
+
+        public virtual bool Remove(int value)
+        {
+            return Remove(root, value);
+        }
+        private bool Remove(BinaryTreeNode root, int value)
+        {
+            if (root == null)
+                return false;
+            if (root.key > value)
+            {
+                return Remove(root.left, value);
+            }
+            else
+            {
+                if (root.key < value)
+                {
+                    return Remove(root.right, value);
+                }
+                else
+                {
+                    if (root.Isleaf)   // 0 co con
+                    {
+                        if (root.parent.left == root)
+                            root.parent.left = null;
+                        else if (root.parent.right == root)
+                            root.parent.right = null;
+                    }
+                    else
+                    {
+                        if (root.HasLeft && root.HasRight) //2 con
+                        {
+                            BinaryTreeNode p = root.right;
+                            MoveLeftMostNode(p, root);
+                            Remove(p, p.key);
+                        }  
+                        else // 1 con
+                        {
+                            BinaryTreeNode subNode;
+                            if(root.HasLeft)
+                            {
+                                subNode = root.left;
+                            }
+                            else
+                            {
+                                subNode = root.right;
+                            }
+                            if (root == (subNode))
+                                root = subNode;
+
+                            subNode.parent = root.parent;
+
+                            if (root.parent.left == root)
+                                root.parent.left = subNode;
+                            else
+                                root.parent.right = subNode;
+                        }
+                        
+                    }
+                    count--;
+                    return true;
+                }
+            }
+        }
+        private void MoveLeftMostNode(BinaryTreeNode p, BinaryTreeNode root)
+        {
+            if (p.left != null)
+                MoveLeftMostNode(p.left, root);
+            else
+            {
+                root.key = p.key;
+            }
+        }
+
+
+
     }
 }
