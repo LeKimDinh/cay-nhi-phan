@@ -8,3 +8,13 @@ G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.csproj.GenerateResource.cache
 G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.csproj.CoreCompileInputs.cache
 G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.exe
 G:\CTDL&GT\Cay\Cay\obj\Debug\Cay.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\bin\Debug\Cay.exe.config
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\bin\Debug\Cay.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\bin\Debug\Cay.pdb
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.csprojAssemblyReference.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.CayNP.resources
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.Properties.Resources.resources
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.csproj.GenerateResource.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.csproj.CoreCompileInputs.cache
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.exe
+D:\GITHUB\cay-nhi-phan\cay-nhi-phan\Cay\Cay\obj\Debug\Cay.pdb
