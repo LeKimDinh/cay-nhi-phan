@@ -9,9 +9,8 @@ namespace DemoBinaryTree
     class BinaryTreeNode
     {
         public int key { get; set; }
-        public BinaryTreeNode left { get; set; }
-        public BinaryTreeNode right { get; set; }
-        public BinaryTreeNode parent { get; set; }
+        public BinaryTreeNode left;
+        public BinaryTreeNode right;
         public bool Isleaf
         {
             get { return left == null && right == null; }
@@ -66,7 +65,6 @@ namespace DemoBinaryTree
                 if (!node1.HasLeft)
                 {
                     node1.left = node2;
-                    node2.parent = node1;
                     count++;
                     return true;
                 }
@@ -78,7 +76,6 @@ namespace DemoBinaryTree
                 if (!node1.HasRight)
                 {
                     node1.right = node2;
-                    node2.parent = node1;
                     count++;
                     return true;
                 }
@@ -102,13 +99,11 @@ namespace DemoBinaryTree
             if (node.HasLeft)
             {
                 ClearChildren(node.left);
-                node.left.parent = null;
                 node.left = null;
             }
             if (node.HasRight)
             {
                 ClearChildren(node.right);
-                node.right.parent = null;
                 node.right= null;
             }
         }
@@ -196,71 +191,60 @@ namespace DemoBinaryTree
 
         public virtual bool Remove(int value)
         {
-            return Remove(root, value);
+            return Remove(ref root, value);
         }
-        private bool Remove(BinaryTreeNode root, int value)
+        private bool Remove(ref BinaryTreeNode root, int value)
         {
             if (root == null)
                 return false;
-            if (root.key > value)
+            if (root.key == value)
             {
-                return Remove(root.left, value);
-            }
-            else
-            {
-                if (root.key < value)
+                if (root.left == null && root.right == null)
                 {
-                    return Remove(root.right, value);
+                    root = null;
                 }
                 else
                 {
-                    if (root.Isleaf)   // 0 co con
+                    if (root.left == null)
                     {
-                        if (root.parent.left == root)
-                            root.parent.left = null;
-                        else if (root.parent.right == root)
-                            root.parent.right = null;
+                        root = root.right;
+                        root.right = null;
                     }
                     else
                     {
-                        if (root.HasLeft && root.HasRight) //2 con
+                        if (root.right == null)
                         {
-                            BinaryTreeNode p = root.right;
-                            MoveLeftMostNode(p, root);
-                            Remove(p, p.key);
-                        }  
-                        else // 1 con
-                        {
-                            BinaryTreeNode subNode;
-                            if(root.HasLeft)
-                            {
-                                subNode = root.left;
-                            }
-                            else
-                            {
-                                subNode = root.right;
-                            }
-                            if (root == (subNode))
-                                root = subNode;
+                            root = root.left;
+                            root.left = null;
 
-                            subNode.parent = root.parent;
-
-                            if (root.parent.left == root)
-                                root.parent.left = subNode;
-                            else
-                                root.parent.right = subNode;
                         }
-                        
+                        else
+                        {
+                            MoveLeftMostNode(ref root.right, root);
+                            Remove(ref root.right, root.right.key);
+                        }
+
                     }
-                    count--;
-                    return true;
                 }
             }
+            else
+            {
+                if (root.key > value)
+                {
+                    return Remove(ref root.left, value);
+                }
+                if (root.key < value)
+                {
+                    return Remove(ref root.right, value);
+                }
+            }
+            count--;
+            return true;
         }
-        private void MoveLeftMostNode(BinaryTreeNode p, BinaryTreeNode root)
+        private void MoveLeftMostNode(ref BinaryTreeNode p, BinaryTreeNode root)
         {
             if (p.left != null)
-                MoveLeftMostNode(p.left, root);
+                MoveLeftMostNode(ref p.left, root);
             else
             {
                 root.key = p.key;

@@ -84,7 +84,7 @@ namespace BinaryTree
 
         }
         //xóa node
-         public  bool Remove(BSTree root,int key)
+         public  bool Remove(ref BSTree root,int key)
         {
             if (root == null)
                 return false;
@@ -92,16 +92,14 @@ namespace BinaryTree
             {
                 if (root.left == null && root.right == null)
                 {
-                    root = null;
-                   
+                    root = null;                   
                 }
                 else
                 {
                     if (root.left == null)
                     {
                         root = root.right;
-                        root.right = null;
-                        
+                        root.right = null;                        
                     }
                     else
                     {
@@ -113,8 +111,8 @@ namespace BinaryTree
                         }
                         else
                         {
-                            MoveLeftMostNode(root.right, root);
-                            
+                            MoveLeftMostNode(ref root.right,  root);
+                            Remove(ref root.right, root.right.data);
                         }
                      
                     }
@@ -124,27 +122,25 @@ namespace BinaryTree
             {
                 if (root.data > key)
                 {
-                    return Remove(root.left, key);
+                    return Remove(ref root.left, key);
                 }
                 if (root.data < key)
                 {
-                    return Remove(root.right, key);
+                    return Remove(ref root.right, key);
                 }
             }
             return true;
         }
-       
-        public void MoveLeftMostNode(BSTree p, BSTree root)
+
+        public void MoveLeftMostNode(ref BSTree p,  BSTree root)
         {
             if (p.left != null)
-                MoveLeftMostNode(p.left, root);
+                MoveLeftMostNode(ref p.left,  root);
             else
             {
                 
-                root.data = p.data;
-                BSTree n = p.right;
-                p = n;
-                p.right= null;
+                root.data = p.data;              
+               
             }
         }  
         //tính chiều cao cây nhị phân

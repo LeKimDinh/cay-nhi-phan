@@ -36,8 +36,10 @@ namespace BinaryTree
             //Console.Write("Chieu cao lon nhat cua cay: ");
             //int kq = Convert.ToInt32(tr.ChieuCao(tr.root));
             //Console.WriteLine(kq);
+            tr.Output(tr.root);
+            Console.WriteLine();
             Console.WriteLine("Cay sau khi xoa node: ");
-            Console.WriteLine(tr.Remove(tr.root, x));
+            Console.WriteLine(tr.Remove(ref tr.root, x));
             tr.Output(tr.root);
             //Console.WriteLine();
             //Console.Write("So nut la cua cay: ");
