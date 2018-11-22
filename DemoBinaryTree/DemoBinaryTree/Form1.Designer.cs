@@ -49,6 +49,7 @@
             this.btnPostOrderTraverse = new System.Windows.Forms.Button();
             this.lblNodeCount = new System.Windows.Forms.Label();
             this.lblTreeHeight = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -65,7 +66,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(612, 339);
+            this.panel2.Size = new System.Drawing.Size(613, 339);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox1
@@ -73,7 +74,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(608, 335);
+            this.pictureBox1.Size = new System.Drawing.Size(609, 335);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -256,17 +257,28 @@
             // lblTreeHeight
             // 
             this.lblTreeHeight.AutoSize = true;
-            this.lblTreeHeight.Location = new System.Drawing.Point(437, 433);
+            this.lblTreeHeight.Location = new System.Drawing.Point(437, 420);
             this.lblTreeHeight.Name = "lblTreeHeight";
             this.lblTreeHeight.Size = new System.Drawing.Size(34, 13);
             this.lblTreeHeight.TabIndex = 19;
             this.lblTreeHeight.Text = "Value";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(506, 430);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 53);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Thoát";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 495);
+            this.ClientSize = new System.Drawing.Size(613, 495);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblTreeHeight);
             this.Controls.Add(this.lblNodeCount);
             this.Controls.Add(this.btnPostOrderTraverse);
@@ -289,6 +301,7 @@
             this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -325,6 +338,7 @@
         private System.Windows.Forms.Button btnPostOrderTraverse;
         private System.Windows.Forms.Label lblNodeCount;
         private System.Windows.Forms.Label lblTreeHeight;
+        private System.Windows.Forms.Button button1;
     }
 }
 

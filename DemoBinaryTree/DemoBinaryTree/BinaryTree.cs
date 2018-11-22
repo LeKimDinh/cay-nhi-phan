@@ -8,7 +8,7 @@ namespace DemoBinaryTree
 {
     class BinaryTreeNode
     {
-        public int key { get; set; }
+        public int key;
         public BinaryTreeNode left;
         public BinaryTreeNode right;
         public bool Isleaf
@@ -119,12 +119,10 @@ namespace DemoBinaryTree
         {
             Queue<int> q = new Queue<int>();
             BinaryTreeNode node = this.root;
-            bool isFounded = false;
             while (node != null)
             {
                 if (node.key.Equals(value))
                 {
-                    isFounded = true;
                     break;
                 }
                 else
@@ -136,12 +134,7 @@ namespace DemoBinaryTree
                     if (node != null)
                         q.Enqueue(node.key);
                 }
-            }           
-            if (!isFounded)
-            {
-                q.Clear();
-                q = null;
-            }
+            }                       
             return q;
         }
         public virtual List<int> InOrderTraverse()
@@ -188,12 +181,13 @@ namespace DemoBinaryTree
             PostOrderTraverse(node.right);
             
         }
+       public int x;
 
         public virtual bool Remove(int value)
         {
-            return Remove(ref root, value);
+            return Remove(ref root, value,ref x);
         }
-        private bool Remove(ref BinaryTreeNode root, int value)
+        private bool Remove(ref BinaryTreeNode root, int value,ref int x)
         {
             if (root == null)
                 return false;
@@ -209,6 +203,8 @@ namespace DemoBinaryTree
                     {
                         root = root.right;
                         root.right = null;
+                       
+                        x = root.key;
                     }
                     else
                     {
@@ -216,12 +212,13 @@ namespace DemoBinaryTree
                         {
                             root = root.left;
                             root.left = null;
-
+                           
+                            x = root.key;
                         }
                         else
                         {
                             MoveLeftMostNode(ref root.right, root);
-                            Remove(ref root.right, root.right.key);
+                            Remove(ref root.right, root.right.key,ref x);
                         }
 
                     }
@@ -231,11 +228,11 @@ namespace DemoBinaryTree
             {
                 if (root.key > value)
                 {
-                    return Remove(ref root.left, value);
+                    return Remove(ref root.left, value,ref x);
                 }
                 if (root.key < value)
                 {
-                    return Remove(ref root.right, value);
+                    return Remove(ref root.right, value,ref x);
                 }
             }
             count--;
@@ -250,8 +247,5 @@ namespace DemoBinaryTree
                 root.key = p.key;
             }
         }
-
-
-
     }
 }

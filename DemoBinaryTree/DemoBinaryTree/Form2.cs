@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace DemoBinaryTree
 {
     public partial class Form2 : Form
@@ -15,6 +14,7 @@ namespace DemoBinaryTree
         public Form2()
         {
             InitializeComponent();
+
 
         }
 
@@ -30,13 +30,18 @@ namespace DemoBinaryTree
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form1 TaoCay = new Form1();
+          
+            Form1 TaoCay = new Form1();         
             TaoCay.Show();
-
+            this.Hide();
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
         {
 
         }
