@@ -55,32 +55,38 @@ namespace DemoBinaryTree
         public Form1()
         {
             InitializeComponent();
+
             _brush = new LinearGradientBrush(new Rectangle(0, VER_DISTANCE / 2, 100, VER_DISTANCE),
         Color.LightSkyBlue, Color.White, LinearGradientMode.Vertical);
             _penNormal = new Pen(Color.DarkBlue, 3);
             _penHighLight = new Pen(Color.Red, 3);
-            _font = new Font("Arial", 18);
+            _font = new Font("Time New Roman", 18);
             _Tree = new BinaryTree();
-
         }       
         private void BeginDraw(bool resetAll)
         {
-            _ratio = (_Tree.count * 200) /this.Width;
+            _ratio = (_Tree.count * 1000) /this.Width;
             if (resetAll == true)
             {
+                if (pictureBox1.Image != null)
+                    pictureBox1.Image.Dispose();
                 _leftRoot = pictureBox1.Width / 2;
                 _minLeft = _leftRoot;
                 _maxLeft = _leftRoot;
                 _g = pictureBox1.CreateGraphics();
                 CalculateSize(_g, _leftRoot, _Tree.root);
-                _leftRoot += 100 - _minLeft;
-                _maxLeft += 250 - _minLeft;
+                _leftRoot -= _minLeft;
+                _maxLeft -= _minLeft;
+                _minLeft = 0;
+                _leftRoot += 100;
+                _maxLeft += 350;
             }
-            Image img = new Bitmap((int)_maxLeft, (_Tree.GetHeight() + 1) * VER_DISTANCE);
+            Image img = new Bitmap((int)_maxLeft, (_Tree.GetHeight() + 2) * VER_DISTANCE+100);
+            
             pictureBox1.Image = img;
             _g = Graphics.FromImage(pictureBox1.Image);
             _g.SmoothingMode = SmoothingMode.AntiAlias;
-            DrawTreeNode(_g, new PointF(_leftRoot, DIAMETER * 2), _Tree.root, true);
+            DrawTreeNode(_g, new PointF(_leftRoot, DIAMETER ), _Tree.root, true);
         }
         private void CalculateSize(Graphics g, float left, BinaryTreeNode node)
         {
@@ -89,10 +95,12 @@ namespace DemoBinaryTree
             {
                 string text = node.key.ToString();
                 SizeF size = g.MeasureString(text, pictureBox1.Font);
-                float x = left /*- (RADIUS + size.Width) / 2*/;
+                float x = left - (RADIUS + size.Width) / 2;
+               
                 if (node.HasLeft)
                 {
-                    float p2 = x - Math.Abs(node.key - node.left.key) * _ratio * 5 / 3;
+
+                    float p2 = x - Math.Abs(node.key - node.left.key) * _ratio;
                     if (p2 < _minLeft)
                         _minLeft = p2;
                     if (p2 > _maxLeft)
@@ -101,7 +109,7 @@ namespace DemoBinaryTree
                 }
                 if (node.HasRight)
                 {
-                    float p2 = x + Math.Abs(node.right.key - node.key) * _ratio + 60;
+                    float p2 = x + Math.Abs(node.key - node.right.key) * _ratio;
                     if (p2 < _minLeft)
                         _minLeft = p2;
                     if (p2 > _maxLeft)
@@ -119,15 +127,16 @@ namespace DemoBinaryTree
                 float ellipseWidth = RADIUS + size.Width;
                 float ellipseHeight = RADIUS + size.Height;
                 float left = p.X - ellipseWidth / 2;
-                float top = p.Y - ellipseHeight / 2;
+                float top = p.Y - ellipseHeight / 2;               
                 Pen pen = _penNormal;
                 if (node.HasLeft)
                 {
                     PointF p1 = p;
                     PointF p2 = p;
-                    p1.X = left + ellipseWidth / 2;
-                    p2.X -= (node.key - node.left.key) * _ratio * 5 / 3;
-                    p2.Y += VER_DISTANCE;
+                    p1.X = left + ellipseWidth / 2;                    
+                    p2.X -= (node.key - node.left.key+(18/10)) * _ratio * (11 / 10);
+
+                    p2.Y += VER_DISTANCE;                    
                     bool hlight = false;
                     if (_queue != null && _queue.Count > 0)
                     {
@@ -137,18 +146,23 @@ namespace DemoBinaryTree
                             pen = _penHighLight;
                             hlight = true;
                         }
-                    }                
-                  
+                    }                                  
                     g.DrawLine(pen, p1, p2);
                     DrawTreeNode(g, p2, node.left, hlight);
+                    if (p2.X < _minLeft)
+                        _minLeft = p2.X;
+                    if (p2.X > _maxLeft)
+                        _maxLeft = p2.X;
                 }
                 if (node.HasRight)
                 {
                     PointF p1 = p;
                     PointF p2 = p;
                     p1.X = left + ellipseWidth / 2;
-                    p2.X += (node.right.key - node.key) * _ratio + 60;
-                    p2.Y += VER_DISTANCE;
+                    p2.X += (node.right.key- node.key) * _ratio * (12 / 10);
+
+                   
+                    p2.Y += VER_DISTANCE;                    
                     pen = _penNormal;
                     bool hlight = false;
                     if (_queue != null && _queue.Count > 0)
@@ -159,10 +173,13 @@ namespace DemoBinaryTree
                             pen = _penHighLight;
                             hlight = true;
                         }
-                    }                  
-                   
+                    }                                     
                     g.DrawLine(pen, p1, p2);
                     DrawTreeNode(g, p2, node.right, hlight);
+                    if (p2.X < _minLeft)
+                        _minLeft = p2.X;
+                    if (p2.X > _maxLeft)
+                        _maxLeft = p2.X;
                 }
                 pen = highlight ? _penHighLight : _penNormal;
                 g.FillEllipse(_brush, left, top, ellipseWidth, ellipseHeight);
@@ -170,34 +187,40 @@ namespace DemoBinaryTree
                 g.DrawString(text, _font, Brushes.DarkRed, left + RADIUS / 2, top + RADIUS / 2);
             }
         }
-
+        // add
         public bool Add(int value)
         {
-            if (!_Tree.Add(value))
+            _queue = _Tree.ADD(value);
+            if (_queue==null)
             {
-                txtOutput.Text = "Tree already contain an node with value " + value;
-                txtOutput.SelectAll();
+               
+                MessageBox.Show($"Tree already contain an node with value {value}");
                 return false;
             }
-            txtOutput.Clear();
-            BeginDraw(true);
-            _queue = _Tree.FindPath(value);
+                   
             BeginDraw(false);
             return true;
         }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
 
+            Add((int)numericUpDown1.Value);
+            UpdateInfo();
+
+        }
         private void btnGenerateTree_Click(object sender, EventArgs e)           
         {
            
-            _Tree.Clear();
+           
             int min = (int)numMin.Value;
             int max = (int)numMax.Value;
             int size = (int)numSize.Value;
-            if (min >= max || (max - min < size))
+            if (min >= max || (max - min )< size)
             {
                 MessageBox.Show("Invalid parameters!", "OMG");
                 return;
             }
+            _Tree.Clear();
             Random rnd = new Random();
             int[] arr = new int[size];
             for (int i = 0; i < arr.Length; i++)
@@ -209,78 +232,69 @@ namespace DemoBinaryTree
             UpdateInfo();
 
         }
-
+        //Search
         private void btnSearch_Click(object sender, EventArgs e)
         {
-           
-            int value = (int)numericUpDown1.Value;
+          
+            int value = (int)numericUpDown1.Value;           
             _queue = _Tree.FindPath(value);
             if (_queue == null)
             {
-                txtOutput.Text = "Tree does not contain value " + value;
-                txtOutput.SelectAll();
-                return ;
+                MessageBox.Show($"Tree does not contain value {value}");
+                return;
             }
-            txtOutput.Clear();
+         
             BeginDraw(false);           
             return;
         }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            
-            Add((int)numericUpDown1.Value);
-            UpdateInfo();
-
-        }
+        //Traverses
         private void btnInOrderTraverse_Click(object sender, EventArgs e)
         {
-           
-            txtOutput.Clear();
-            StringBuilder str = new StringBuilder("In-Order Traversal: ");
-            List<int> list = _Tree.InOrderTraverse();
-            list.ForEach(i => str.Append(i).Append(", "));
-            txtOutput.Text = str.ToString();
-            list.Clear();
-            list = null;
-           
-        }
 
+            lbnduyet.Text = "";
+
+            List<int> list = _Tree.PostOrderTraverse();
+            lbnduyet.Text = "InOrderTraverse: ";
+            foreach (int a in list)
+            {
+                lbnduyet.Text += a.ToString() + " ";
+            }
+
+        }
         private void btnPreOrderTraverse_Click(object sender, EventArgs e)
         {
-            txtOutput.Clear();
-            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
-            List<int> list = _Tree.PreOrderTraverse();
-            list.ForEach(i => str.Append(i).Append(", "));
-            txtOutput.Text = str.ToString();
-            list.Clear();
-            list = null;
-           
-        }
+            lbnduyet.Text = "";
 
+            List<int> list = _Tree.PostOrderTraverse();
+            lbnduyet.Text = "PreOrderTraverse: ";
+            foreach (int a in list)
+            {
+                lbnduyet.Text += a.ToString() + " ";
+            }
+
+        }
         private void btnPostOrderTraverse_Click(object sender, EventArgs e)
         {
-            txtOutput.Clear();
-            StringBuilder str = new StringBuilder("Pre-Order Traversal: ");
+            lbnduyet.Text = "";
+            
             List<int> list = _Tree.PostOrderTraverse();
-            list.ForEach(i => str.Append(i).Append(", "));
-            txtOutput.Text = str.ToString();
-            list.Clear();
-            list = null;
-           
+            lbnduyet.Text = "PostOrderTraverse: ";
+            foreach (int a in list)
+            {
+                lbnduyet.Text += a.ToString() + " ";
+            }
+            
         }
-
+        //Delete
         private void btnDelete_Click(object sender, EventArgs e)
         {
             
             int value = (int)numericUpDown1.Value;
             if (!_Tree.Remove(value))
             {
-                txtOutput.Text = "Tree does not contain value " + value;
-                txtOutput.SelectAll();
+                MessageBox.Show($"Tree does not contain value {value}"); 
                 return;
             }
-            txtOutput.Clear();
             _queue = _Tree.FindPath(_Tree.x);
             BeginDraw(false);
 
@@ -292,7 +306,6 @@ namespace DemoBinaryTree
             lblNodeCount.Text = "Node Count: " + NodeCount;
             lblTreeHeight.Text = "Tree Height: " + TreeHeight;
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult thoat;
@@ -302,12 +315,16 @@ namespace DemoBinaryTree
                 Application.Exit();
             }
 
+        }
+
+        private void lblTreeHeight_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
     }
 }

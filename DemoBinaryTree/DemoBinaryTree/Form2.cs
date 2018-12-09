@@ -14,8 +14,10 @@ namespace DemoBinaryTree
         public Form2()
         {
             InitializeComponent();
-
-
+            label1.BackColor = Color.Transparent;
+            label2.BackColor = Color.Transparent;
+            label3.BackColor = Color.Transparent;
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -32,8 +34,7 @@ namespace DemoBinaryTree
         {
           
             Form1 TaoCay = new Form1();         
-            TaoCay.Show();
-            this.Hide();
+            TaoCay.Show();            
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)

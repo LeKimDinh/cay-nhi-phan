@@ -82,6 +82,63 @@ namespace DemoBinaryTree
                 else return AddNode(node1.right, node2);
             }        
         }
+        public virtual Queue<int> ADD(int value)
+        {
+            Queue<int> q = new Queue<int>();
+            BinaryTreeNode node = this.root;
+            BinaryTreeNode node1 = new BinaryTreeNode(value);
+            bool isFounded = true;
+
+            if (node == null)
+            {
+                node = node1;
+                node.left = node.right = null;
+                q.Enqueue(node.key);
+                return q;
+            }
+            while (node != null)
+            {
+                if (node.key.Equals(value))
+                {
+                    isFounded = false;
+                    break;
+                }
+                else
+                {
+                    if (node.key.CompareTo(value) > 0)
+                    {
+
+                        if (!node.HasLeft)
+                        {
+                            node.left = node1;
+                            q.Enqueue(node.left.key);
+                            return q;
+                        }
+                        else node = node.left;
+                    }
+                    else
+                    {
+
+                        if (!node.HasRight)
+                        {
+                            node.right = node1;
+                            q.Enqueue(node.right.key);
+                            return q;
+                        }
+                        else node = node.right;
+                    }
+                }
+                if (node != null)
+                    q.Enqueue(node.key);
+            }
+            if (isFounded == false)
+            {
+                q.Clear();
+                q = null;
+            }
+            return q;
+        }
+
         public virtual int GetHeight()
         {
             return this.GetHeight(this.root);
@@ -119,10 +176,12 @@ namespace DemoBinaryTree
         {
             Queue<int> q = new Queue<int>();
             BinaryTreeNode node = this.root;
+            bool isFound = false;
             while (node != null)
             {
                 if (node.key.Equals(value))
                 {
+                    isFound = true;
                     break;
                 }
                 else
@@ -134,7 +193,12 @@ namespace DemoBinaryTree
                     if (node != null)
                         q.Enqueue(node.key);
                 }
-            }                       
+            }
+            if (!isFound)
+            {
+                q.Clear();
+                q = null;
+            }
             return q;
         }
         public virtual List<int> InOrderTraverse()

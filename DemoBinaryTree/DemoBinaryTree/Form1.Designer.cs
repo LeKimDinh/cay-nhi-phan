@@ -31,7 +31,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +49,7 @@
             this.lblNodeCount = new System.Windows.Forms.Label();
             this.lblTreeHeight = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.lbnduyet = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -62,44 +62,57 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.lbnduyet);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(613, 339);
+            this.panel2.Size = new System.Drawing.Size(1019, 616);
             this.panel2.TabIndex = 1;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(609, 335);
+            this.pictureBox1.Size = new System.Drawing.Size(807, 609);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtOutput);
-            this.panel1.Location = new System.Drawing.Point(3, 345);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblTreeHeight);
+            this.panel1.Controls.Add(this.lblNodeCount);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.btnPostOrderTraverse);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.btnPreOrderTraverse);
+            this.panel1.Controls.Add(this.numSize);
+            this.panel1.Controls.Add(this.btnInOrderTraverse);
+            this.panel1.Controls.Add(this.numMin);
+            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.numMax);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.btnGenerateTree);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.numericUpDown1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(815, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(609, 22);
-            this.panel1.TabIndex = 2;
-            // 
-            // txtOutput
-            // 
-            this.txtOutput.BackColor = System.Drawing.Color.Gold;
-            this.txtOutput.Location = new System.Drawing.Point(1, 1);
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(608, 20);
-            this.txtOutput.TabIndex = 0;
+            this.panel1.Size = new System.Drawing.Size(204, 616);
+            this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(12, 370);
+            this.label1.Location = new System.Drawing.Point(10, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 3;
@@ -109,7 +122,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label2.Location = new System.Drawing.Point(15, 395);
+            this.label2.Location = new System.Drawing.Point(10, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 13);
             this.label2.TabIndex = 4;
@@ -118,7 +131,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 425);
+            this.label3.Location = new System.Drawing.Point(10, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 5;
@@ -126,14 +139,14 @@
             // 
             // numSize
             // 
-            this.numSize.Location = new System.Drawing.Point(79, 372);
+            this.numSize.Location = new System.Drawing.Point(91, 7);
             this.numSize.Minimum = new decimal(new int[] {
             3,
             0,
             0,
             0});
             this.numSize.Name = "numSize";
-            this.numSize.Size = new System.Drawing.Size(62, 20);
+            this.numSize.Size = new System.Drawing.Size(49, 20);
             this.numSize.TabIndex = 6;
             this.numSize.Value = new decimal(new int[] {
             10,
@@ -143,16 +156,16 @@
             // 
             // numMin
             // 
-            this.numMin.Location = new System.Drawing.Point(79, 395);
+            this.numMin.Location = new System.Drawing.Point(91, 40);
             this.numMin.Name = "numMin";
-            this.numMin.Size = new System.Drawing.Size(62, 20);
+            this.numMin.Size = new System.Drawing.Size(49, 20);
             this.numMin.TabIndex = 7;
             // 
             // numMax
             // 
-            this.numMax.Location = new System.Drawing.Point(79, 418);
+            this.numMax.Location = new System.Drawing.Point(91, 77);
             this.numMax.Name = "numMax";
-            this.numMax.Size = new System.Drawing.Size(62, 20);
+            this.numMax.Size = new System.Drawing.Size(49, 20);
             this.numMax.TabIndex = 8;
             this.numMax.Value = new decimal(new int[] {
             100,
@@ -162,9 +175,9 @@
             // 
             // btnGenerateTree
             // 
-            this.btnGenerateTree.Location = new System.Drawing.Point(12, 455);
+            this.btnGenerateTree.Location = new System.Drawing.Point(28, 122);
             this.btnGenerateTree.Name = "btnGenerateTree";
-            this.btnGenerateTree.Size = new System.Drawing.Size(129, 28);
+            this.btnGenerateTree.Size = new System.Drawing.Size(158, 28);
             this.btnGenerateTree.TabIndex = 9;
             this.btnGenerateTree.Text = "Generate Random Tree";
             this.btnGenerateTree.UseVisualStyleBackColor = true;
@@ -173,7 +186,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(163, 374);
+            this.label4.Location = new System.Drawing.Point(10, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 10;
@@ -181,16 +194,16 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(203, 370);
+            this.numericUpDown1.Location = new System.Drawing.Point(91, 156);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
             this.numericUpDown1.TabIndex = 11;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(166, 396);
+            this.btnAdd.Location = new System.Drawing.Point(28, 192);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(102, 28);
+            this.btnAdd.Size = new System.Drawing.Size(162, 28);
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "Add Node";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -198,9 +211,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(166, 425);
+            this.btnSearch.Location = new System.Drawing.Point(28, 226);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(102, 28);
+            this.btnSearch.Size = new System.Drawing.Size(162, 28);
             this.btnSearch.TabIndex = 13;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -208,9 +221,9 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(166, 455);
+            this.btnDelete.Location = new System.Drawing.Point(28, 260);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(102, 28);
+            this.btnDelete.Size = new System.Drawing.Size(162, 28);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete Node";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -218,9 +231,9 @@
             // 
             // btnInOrderTraverse
             // 
-            this.btnInOrderTraverse.Location = new System.Drawing.Point(293, 391);
+            this.btnInOrderTraverse.Location = new System.Drawing.Point(28, 294);
             this.btnInOrderTraverse.Name = "btnInOrderTraverse";
-            this.btnInOrderTraverse.Size = new System.Drawing.Size(117, 28);
+            this.btnInOrderTraverse.Size = new System.Drawing.Size(162, 28);
             this.btnInOrderTraverse.TabIndex = 15;
             this.btnInOrderTraverse.Text = "In-Order Traverse";
             this.btnInOrderTraverse.UseVisualStyleBackColor = true;
@@ -228,9 +241,9 @@
             // 
             // btnPreOrderTraverse
             // 
-            this.btnPreOrderTraverse.Location = new System.Drawing.Point(293, 425);
+            this.btnPreOrderTraverse.Location = new System.Drawing.Point(28, 328);
             this.btnPreOrderTraverse.Name = "btnPreOrderTraverse";
-            this.btnPreOrderTraverse.Size = new System.Drawing.Size(117, 28);
+            this.btnPreOrderTraverse.Size = new System.Drawing.Size(162, 28);
             this.btnPreOrderTraverse.TabIndex = 16;
             this.btnPreOrderTraverse.Text = "Pre-Order Traverse";
             this.btnPreOrderTraverse.UseVisualStyleBackColor = true;
@@ -238,9 +251,9 @@
             // 
             // btnPostOrderTraverse
             // 
-            this.btnPostOrderTraverse.Location = new System.Drawing.Point(293, 455);
+            this.btnPostOrderTraverse.Location = new System.Drawing.Point(28, 362);
             this.btnPostOrderTraverse.Name = "btnPostOrderTraverse";
-            this.btnPostOrderTraverse.Size = new System.Drawing.Size(117, 28);
+            this.btnPostOrderTraverse.Size = new System.Drawing.Size(162, 28);
             this.btnPostOrderTraverse.TabIndex = 17;
             this.btnPostOrderTraverse.Text = "Post-Order Traverse";
             this.btnPostOrderTraverse.UseVisualStyleBackColor = true;
@@ -248,60 +261,54 @@
             // 
             // lblNodeCount
             // 
-            this.lblNodeCount.Location = new System.Drawing.Point(437, 374);
+            this.lblNodeCount.Location = new System.Drawing.Point(10, 487);
             this.lblNodeCount.Name = "lblNodeCount";
-            this.lblNodeCount.Size = new System.Drawing.Size(118, 35);
+            this.lblNodeCount.Size = new System.Drawing.Size(176, 65);
             this.lblNodeCount.TabIndex = 18;
             this.lblNodeCount.Text = "label5";
+            this.lblNodeCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTreeHeight
             // 
             this.lblTreeHeight.AutoSize = true;
-            this.lblTreeHeight.Location = new System.Drawing.Point(437, 420);
+            this.lblTreeHeight.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTreeHeight.Location = new System.Drawing.Point(10, 420);
             this.lblTreeHeight.Name = "lblTreeHeight";
             this.lblTreeHeight.Size = new System.Drawing.Size(34, 13);
             this.lblTreeHeight.TabIndex = 19;
             this.lblTreeHeight.Text = "Value";
+            this.lblTreeHeight.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTreeHeight.Click += new System.EventHandler(this.lblTreeHeight_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(506, 430);
+            this.button1.Location = new System.Drawing.Point(91, 574);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 53);
+            this.button1.Size = new System.Drawing.Size(49, 41);
             this.button1.TabIndex = 20;
             this.button1.Text = "Thoát";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // lbnduyet
+            // 
+            this.lbnduyet.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbnduyet.Location = new System.Drawing.Point(152, 486);
+            this.lbnduyet.Name = "lbnduyet";
+            this.lbnduyet.Size = new System.Drawing.Size(473, 103);
+            this.lbnduyet.TabIndex = 19;
+            this.lbnduyet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 495);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblTreeHeight);
-            this.Controls.Add(this.lblNodeCount);
-            this.Controls.Add(this.btnPostOrderTraverse);
-            this.Controls.Add(this.btnPreOrderTraverse);
-            this.Controls.Add(this.btnInOrderTraverse);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnGenerateTree);
-            this.Controls.Add(this.numMax);
-            this.Controls.Add(this.numMin);
-            this.Controls.Add(this.numSize);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1019, 616);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -311,7 +318,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -320,7 +326,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -339,6 +344,7 @@
         private System.Windows.Forms.Label lblNodeCount;
         private System.Windows.Forms.Label lblTreeHeight;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lbnduyet;
     }
 }
 
