@@ -134,7 +134,7 @@ namespace DemoBinaryTree
                     PointF p1 = p;
                     PointF p2 = p;
                     p1.X = left + ellipseWidth / 2;                    
-                    p2.X -= (node.key - node.left.key+(18/10)) * _ratio * (11 / 10);
+                    p2.X -= (node.key - node.left.key+(18/10)) * _ratio * (13 / 10);
 
                     p2.Y += VER_DISTANCE;                    
                     bool hlight = false;

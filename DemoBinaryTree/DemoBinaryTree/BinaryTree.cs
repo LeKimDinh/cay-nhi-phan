@@ -309,6 +309,7 @@ namespace DemoBinaryTree
             else
             {
                 root.key = p.key;
+                x = root.key;
             }
         }
     }
