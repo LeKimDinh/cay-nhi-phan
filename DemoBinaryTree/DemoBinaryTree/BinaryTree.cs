@@ -35,6 +35,7 @@ namespace DemoBinaryTree
        public BinaryTreeNode root;
        List<int> _list;
        public  int count;
+        int y;
         // khởi tạo
         public BinaryTree()
         {
@@ -66,6 +67,7 @@ namespace DemoBinaryTree
                 {
                     node1.left = node2;
                     count++;
+                    y = count;
                     return true;
                 }
                 else
@@ -77,6 +79,7 @@ namespace DemoBinaryTree
                 {
                     node1.right = node2;
                     count++;
+                    y = count;
                     return true;
                 }
                 else return AddNode(node1.right, node2);
@@ -92,7 +95,7 @@ namespace DemoBinaryTree
             if (node == null)
             {
                 node = node1;
-                node.left = node.right = null;
+                count++;
                 q.Enqueue(node.key);
                 return q;
             }
@@ -112,6 +115,7 @@ namespace DemoBinaryTree
                         {
                             node.left = node1;
                             q.Enqueue(node.left.key);
+                            count++;
                             return q;
                         }
                         else node = node.left;
@@ -123,6 +127,7 @@ namespace DemoBinaryTree
                         {
                             node.right = node1;
                             q.Enqueue(node.right.key);
+                            count++;
                             return q;
                         }
                         else node = node.right;
@@ -249,7 +254,8 @@ namespace DemoBinaryTree
 
         public virtual bool Remove(int value)
         {
-            return Remove(ref root, value,ref x);
+            
+            return Remove(ref root, value, ref x);            
         }
         private bool Remove(ref BinaryTreeNode root, int value,ref int x)
         {
@@ -259,6 +265,7 @@ namespace DemoBinaryTree
             {
                 if (root.left == null && root.right == null)
                 {
+                    count--;
                     root = null;
                 }
                 else
@@ -266,23 +273,27 @@ namespace DemoBinaryTree
                     if (root.left == null)
                     {
                         root = root.right;
-                        root.right = null;
-                       
-                        x = root.key;
+                        //root.right = null;
+                        count--;
+                        if (x==0)
+                            x = root.key;
                     }
                     else
                     {
                         if (root.right == null)
                         {
                             root = root.left;
-                            root.left = null;
-                           
-                            x = root.key;
+                            //root.left = null;
+                            count--;
+                            if(x==0)
+                                x = root.key;
+
                         }
                         else
                         {
                             MoveLeftMostNode(ref root.right, root);
-                            Remove(ref root.right, root.right.key,ref x);
+                            Remove(ref root.right, root.key,ref x);
+                            
                         }
 
                     }
@@ -299,7 +310,7 @@ namespace DemoBinaryTree
                     return Remove(ref root.right, value,ref x);
                 }
             }
-            count--;
+            
             return true;
         }
         private void MoveLeftMostNode(ref BinaryTreeNode p, BinaryTreeNode root)
@@ -308,8 +319,10 @@ namespace DemoBinaryTree
                 MoveLeftMostNode(ref p.left, root);
             else
             {
+
                 root.key = p.key;
                 x = root.key;
+
             }
         }
     }

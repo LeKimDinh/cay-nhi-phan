@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lbnduyet = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTreeHeight = new System.Windows.Forms.Label();
+            this.lblNodeCount = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnPostOrderTraverse = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnPreOrderTraverse = new System.Windows.Forms.Button();
             this.numSize = new System.Windows.Forms.NumericUpDown();
+            this.btnInOrderTraverse = new System.Windows.Forms.Button();
             this.numMin = new System.Windows.Forms.NumericUpDown();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.numMax = new System.Windows.Forms.NumericUpDown();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.btnGenerateTree = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnInOrderTraverse = new System.Windows.Forms.Button();
-            this.btnPreOrderTraverse = new System.Windows.Forms.Button();
-            this.btnPostOrderTraverse = new System.Windows.Forms.Button();
-            this.lblNodeCount = new System.Windows.Forms.Label();
-            this.lblTreeHeight = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lbnduyet = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,6 +70,15 @@
             this.panel2.Size = new System.Drawing.Size(1019, 616);
             this.panel2.TabIndex = 1;
             // 
+            // lbnduyet
+            // 
+            this.lbnduyet.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbnduyet.Location = new System.Drawing.Point(121, 500);
+            this.lbnduyet.Name = "lbnduyet";
+            this.lbnduyet.Size = new System.Drawing.Size(630, 89);
+            this.lbnduyet.TabIndex = 19;
+            this.lbnduyet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -79,6 +88,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel1
             // 
@@ -108,6 +118,37 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // lblTreeHeight
+            // 
+            this.lblTreeHeight.AutoSize = true;
+            this.lblTreeHeight.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTreeHeight.Location = new System.Drawing.Point(63, 419);
+            this.lblTreeHeight.Name = "lblTreeHeight";
+            this.lblTreeHeight.Size = new System.Drawing.Size(34, 13);
+            this.lblTreeHeight.TabIndex = 19;
+            this.lblTreeHeight.Text = "Value";
+            this.lblTreeHeight.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTreeHeight.Click += new System.EventHandler(this.lblTreeHeight_Click);
+            // 
+            // lblNodeCount
+            // 
+            this.lblNodeCount.Location = new System.Drawing.Point(14, 481);
+            this.lblNodeCount.Name = "lblNodeCount";
+            this.lblNodeCount.Size = new System.Drawing.Size(176, 65);
+            this.lblNodeCount.TabIndex = 18;
+            this.lblNodeCount.Text = "label5";
+            this.lblNodeCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(77, 549);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(49, 41);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Thoát";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -128,6 +169,16 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Min";
             // 
+            // btnPostOrderTraverse
+            // 
+            this.btnPostOrderTraverse.Location = new System.Drawing.Point(28, 362);
+            this.btnPostOrderTraverse.Name = "btnPostOrderTraverse";
+            this.btnPostOrderTraverse.Size = new System.Drawing.Size(162, 28);
+            this.btnPostOrderTraverse.TabIndex = 17;
+            this.btnPostOrderTraverse.Text = "Post-Order Traverse";
+            this.btnPostOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPostOrderTraverse.Click += new System.EventHandler(this.btnPostOrderTraverse_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -136,6 +187,16 @@
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Max";
+            // 
+            // btnPreOrderTraverse
+            // 
+            this.btnPreOrderTraverse.Location = new System.Drawing.Point(28, 328);
+            this.btnPreOrderTraverse.Name = "btnPreOrderTraverse";
+            this.btnPreOrderTraverse.Size = new System.Drawing.Size(162, 28);
+            this.btnPreOrderTraverse.TabIndex = 16;
+            this.btnPreOrderTraverse.Text = "Pre-Order Traverse";
+            this.btnPreOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnPreOrderTraverse.Click += new System.EventHandler(this.btnPreOrderTraverse_Click);
             // 
             // numSize
             // 
@@ -154,12 +215,32 @@
             0,
             0});
             // 
+            // btnInOrderTraverse
+            // 
+            this.btnInOrderTraverse.Location = new System.Drawing.Point(28, 294);
+            this.btnInOrderTraverse.Name = "btnInOrderTraverse";
+            this.btnInOrderTraverse.Size = new System.Drawing.Size(162, 28);
+            this.btnInOrderTraverse.TabIndex = 15;
+            this.btnInOrderTraverse.Text = "In-Order Traverse";
+            this.btnInOrderTraverse.UseVisualStyleBackColor = true;
+            this.btnInOrderTraverse.Click += new System.EventHandler(this.btnInOrderTraverse_Click);
+            // 
             // numMin
             // 
             this.numMin.Location = new System.Drawing.Point(91, 40);
             this.numMin.Name = "numMin";
             this.numMin.Size = new System.Drawing.Size(49, 20);
             this.numMin.TabIndex = 7;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(28, 260);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(162, 28);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "Delete Node";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // numMax
             // 
@@ -173,6 +254,16 @@
             0,
             0});
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(28, 226);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(162, 28);
+            this.btnSearch.TabIndex = 13;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // btnGenerateTree
             // 
             this.btnGenerateTree.Location = new System.Drawing.Point(28, 122);
@@ -182,6 +273,16 @@
             this.btnGenerateTree.Text = "Generate Random Tree";
             this.btnGenerateTree.UseVisualStyleBackColor = true;
             this.btnGenerateTree.Click += new System.EventHandler(this.btnGenerateTree_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(28, 192);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(162, 28);
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Add Node";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label4
             // 
@@ -198,106 +299,6 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
             this.numericUpDown1.TabIndex = 11;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(28, 192);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(162, 28);
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "Add Node";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(28, 226);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(162, 28);
-            this.btnSearch.TabIndex = 13;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(28, 260);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(162, 28);
-            this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Delete Node";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnInOrderTraverse
-            // 
-            this.btnInOrderTraverse.Location = new System.Drawing.Point(28, 294);
-            this.btnInOrderTraverse.Name = "btnInOrderTraverse";
-            this.btnInOrderTraverse.Size = new System.Drawing.Size(162, 28);
-            this.btnInOrderTraverse.TabIndex = 15;
-            this.btnInOrderTraverse.Text = "In-Order Traverse";
-            this.btnInOrderTraverse.UseVisualStyleBackColor = true;
-            this.btnInOrderTraverse.Click += new System.EventHandler(this.btnInOrderTraverse_Click);
-            // 
-            // btnPreOrderTraverse
-            // 
-            this.btnPreOrderTraverse.Location = new System.Drawing.Point(28, 328);
-            this.btnPreOrderTraverse.Name = "btnPreOrderTraverse";
-            this.btnPreOrderTraverse.Size = new System.Drawing.Size(162, 28);
-            this.btnPreOrderTraverse.TabIndex = 16;
-            this.btnPreOrderTraverse.Text = "Pre-Order Traverse";
-            this.btnPreOrderTraverse.UseVisualStyleBackColor = true;
-            this.btnPreOrderTraverse.Click += new System.EventHandler(this.btnPreOrderTraverse_Click);
-            // 
-            // btnPostOrderTraverse
-            // 
-            this.btnPostOrderTraverse.Location = new System.Drawing.Point(28, 362);
-            this.btnPostOrderTraverse.Name = "btnPostOrderTraverse";
-            this.btnPostOrderTraverse.Size = new System.Drawing.Size(162, 28);
-            this.btnPostOrderTraverse.TabIndex = 17;
-            this.btnPostOrderTraverse.Text = "Post-Order Traverse";
-            this.btnPostOrderTraverse.UseVisualStyleBackColor = true;
-            this.btnPostOrderTraverse.Click += new System.EventHandler(this.btnPostOrderTraverse_Click);
-            // 
-            // lblNodeCount
-            // 
-            this.lblNodeCount.Location = new System.Drawing.Point(10, 487);
-            this.lblNodeCount.Name = "lblNodeCount";
-            this.lblNodeCount.Size = new System.Drawing.Size(176, 65);
-            this.lblNodeCount.TabIndex = 18;
-            this.lblNodeCount.Text = "label5";
-            this.lblNodeCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lblTreeHeight
-            // 
-            this.lblTreeHeight.AutoSize = true;
-            this.lblTreeHeight.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblTreeHeight.Location = new System.Drawing.Point(10, 420);
-            this.lblTreeHeight.Name = "lblTreeHeight";
-            this.lblTreeHeight.Size = new System.Drawing.Size(34, 13);
-            this.lblTreeHeight.TabIndex = 19;
-            this.lblTreeHeight.Text = "Value";
-            this.lblTreeHeight.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblTreeHeight.Click += new System.EventHandler(this.lblTreeHeight_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(91, 574);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 41);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Thoát";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // lbnduyet
-            // 
-            this.lbnduyet.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbnduyet.Location = new System.Drawing.Point(152, 486);
-            this.lbnduyet.Name = "lbnduyet";
-            this.lbnduyet.Size = new System.Drawing.Size(473, 103);
-            this.lbnduyet.TabIndex = 19;
-            this.lbnduyet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Form1
             // 

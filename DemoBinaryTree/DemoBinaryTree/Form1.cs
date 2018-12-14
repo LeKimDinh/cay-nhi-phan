@@ -198,7 +198,7 @@ namespace DemoBinaryTree
                 return false;
             }
                    
-            BeginDraw(false);
+            BeginDraw(true);
             return true;
         }
         private void btnAdd_Click(object sender, EventArgs e)
@@ -285,25 +285,25 @@ namespace DemoBinaryTree
             }
             
         }
+        
         //Delete
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            
+            _Tree.x = 0;
             int value = (int)numericUpDown1.Value;
             if (!_Tree.Remove(value))
             {
                 MessageBox.Show($"Tree does not contain value {value}"); 
                 return;
-            }
+            }            
             _queue = _Tree.FindPath(_Tree.x);
-            BeginDraw(false);
-
+            BeginDraw(true);
             UpdateInfo();
 
         }
         void UpdateInfo()
         {
-            lblNodeCount.Text = "Node Count: " + NodeCount;
+            lblNodeCount.Text = "Node Count: " + _Tree.count;
             lblTreeHeight.Text = "Tree Height: " + TreeHeight;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -323,6 +323,11 @@ namespace DemoBinaryTree
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
